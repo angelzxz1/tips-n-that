@@ -25,7 +25,7 @@ export const ListTags = ({ tags }: { tags: PostTag[] }) => {
             </SelectTrigger>
             <SelectContent>
                 {tags.map((tag) => (
-                    <SelectItem key={tag.id} value={tag.name}>
+                    <SelectItem key={tag.id} value={tag.id}>
                         {tag.name}
                     </SelectItem>
                 ))}

@@ -94,24 +94,30 @@ ul::first-letter{
   @apply capitalize
 }
 
+h1,h2,h3,h4,h5,h6{
+  font-weight: 600
+}
+
+
+
 h1{
-  @apply text-5xl;
+  @apply text-5xl pb-8;
 
 }
 h2{
-  @apply text-4xl;
+  @apply text-4xl py-8;
 }
 h3{
-  @apply text-3xl;
+  @apply text-3xl py-6;
 }
 h4{
-  @apply text-2xl;
+  @apply text-2xl py-4;
 }
 h5{
-  @apply text-xl;
+  @apply text-xl py-2;
 }
 h6{
-  @apply text-lg;
+  @apply text-lg py-2;
 }
 
 p{
@@ -132,7 +138,7 @@ ul{
   @apply list-disc list-inside;
 }
 li{
-  @apply text-base ;
+  @apply text-base pt-6;
 }
 li>ul{
   @apply pl-6;
@@ -160,11 +166,8 @@ blockquote::after {
   font-size: 30px;
   left: 100%;
 }
-code{
-  @apply bg-gray-800 rounded-md px-2 py-1 w-full;
-}
 pre{
-  @apply bg-gray-800 rounded-md px-2 py-1 w-full;
+  @apply bg-black rounded-md px-3 py-4 w-full text-white;
 }
 
 table{
