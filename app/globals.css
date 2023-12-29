@@ -186,4 +186,3 @@ table tr> td:not(:first-child),
 table tr > th:not(:first-child){
   @apply  border-l ;
 }
-

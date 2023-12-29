@@ -43,7 +43,6 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
     });
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        alert("test");
         try {
             setLoading(true);
             console.log(values);

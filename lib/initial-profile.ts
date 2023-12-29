@@ -14,9 +14,13 @@ export const initialProfile = async (): Promise<User> => {
             data: {
                 userId: user.id,
                 email: user.emailAddresses[0].emailAddress,
-                name: `${user.firstName} ${user.lastName}`,
-                username: user.username,
+                firstName: user.firstName ? user.firstName : "",
+                lastName: user.lastName ? user.lastName : "",
+                username: user.username
+                    ? user.username
+                    : user.emailAddresses[0].emailAddress,
                 password: "",
+                imageUrl: user.imageUrl,
             },
         });
     return profile;

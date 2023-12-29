@@ -8,8 +8,8 @@ const SetUpPage = async () => {
     const posts = await db.post.findMany();
 
     return (
-        <main className="relative w-full flex justify-center items-center pt-[68px] h-full">
-            <section className="h-full pt-[68px] top-0 left-0 fixed w-1/4 flex justify-center items-center">
+        <main className="relative w-full flex justify-center items-center pt-[68px] h-full ">
+            <section className="h-full pt-[68px] top-0 left-0 fixed w-1/4 flex justify-center items-center ">
                 this is the left side
             </section>
             <section className="h-full w-2/4 ">
