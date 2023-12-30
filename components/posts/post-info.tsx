@@ -31,7 +31,7 @@ const PostInfo = async ({
     });
     if (isPostPage) {
         return (
-            <div className="flex flex-col gap-10 pt-16">
+            <div className="flex lg:flex-col gap-10  w-full items-center justify-evenly lg:items-end ">
                 <div className="flex flex-col items-center justify-center">
                     <ButtonInfo
                         userId={thisProfile?.id}
@@ -52,7 +52,7 @@ const PostInfo = async ({
                     <MessageCircle className="cursor-pointer" strokeWidth={1} />
                     {numberOfComments}
                 </div>
-                <div className="">
+                <div className="flex flex-col items-center justify-center">
                     <Bookmark strokeWidth={1} />
                 </div>
             </div>

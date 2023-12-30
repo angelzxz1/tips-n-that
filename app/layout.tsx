@@ -20,7 +20,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.className} flex justify-center`}>
+                <body className={`${inter.className} flex justify-center px-4`}>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"

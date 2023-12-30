@@ -11,7 +11,7 @@ body,
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 240 20% 95%;
     --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
@@ -43,7 +43,7 @@ body,
   }
  
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 240 1% 14%;
     --foreground: 0 0% 98%;
  
     --card: 0 0% 3.9%;
@@ -78,7 +78,7 @@ body,
     @apply border-border;
   }
   body {
-    @apply bg-[#f0f0f5] dark:bg-[#232324] text-foreground;
+    @apply bg-background dark:bg-background text-foreground;
   }
 }
 
@@ -121,7 +121,7 @@ h6{
 }
 
 p{
-  @apply text-base;
+  @apply text-base w-fit;
 }
 
 a{
@@ -151,6 +151,7 @@ blockquote{
   @apply px-4 font-thin relative ;
   width: fit-content;
   font:italic;
+  overflow-y: auto;
 }
 blockquote::before {
   @apply  absolute -top-2;

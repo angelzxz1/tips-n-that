@@ -33,10 +33,16 @@ const Layout = async ({
 
     return (
         <div className="w-full relative flex justify-center">
-            <div className=" fixed h-full left-0 w-1/4 p-4 flex justify-end">
+            <div
+                className="
+                fixed p-4 flex justify-end z-40 bottom-0 w-full bg-background border-t
+                lg:h-full lg:left-0 lg:w-1/4 lg:bg-transparent lg:justify-center lg:items-center
+                rounded-t-md
+                "
+            >
                 <PostInfo post={postData} isPostPage={true} />
             </div>
-            <main className="w-1/2">{children}</main>
+            <main className="w-full lg:w-1/2">{children}</main>
         </div>
     );
 };
