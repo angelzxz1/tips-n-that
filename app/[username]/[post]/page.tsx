@@ -29,8 +29,8 @@ const PostPage = async ({
         return <div>Post not found</div>;
     }
     return (
-        <div className="pt-[68px] w-full shadow-xl lg:p-4 bg-white dark:bg-zinc-800 rounded-lg relative">
-            {/* <AuthorDetail author={user} /> */}
+        <div className="pt-[68px] w-full shadow-xl lg:p-4 bg-white dark:bg-zinc-800 rounded-lg relative px-2">
+            <AuthorDetail author={user} />
             <Markdown>{postData.content}</Markdown>
         </div>
     );
