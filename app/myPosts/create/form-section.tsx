@@ -46,9 +46,6 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
             post: "",
         },
     });
-    const toggleButton = (toggle: "top" | "mid" | "bot") => {
-        setToggle(toggle);
-    };
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
@@ -73,9 +70,9 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
             "
         >
             <div className="absolute right-0 bg-indigo-800 z-50 p-2 rounded-full lg:hidden grid place-items-center gap-2 ">
-                <ArrowUp onClick={() => toggleButton("top")} />
-                <Grip onClick={() => toggleButton("mid")} />
-                <ArrowDown onClick={() => toggleButton("bot")} />
+                <ArrowUp onClick={() => setToggle("top")} />
+                <Grip onClick={() => setToggle("mid")} />
+                <ArrowDown onClick={() => setToggle("bot")} />
             </div>
             <div
                 className={cn(
