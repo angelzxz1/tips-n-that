@@ -1,4 +1,5 @@
-const UserPage = () => {
+const UserPage = ({ params }: { params: { username: string } }) => {
+    console.log(params);
     return <div>User Page</div>;
 };
 
