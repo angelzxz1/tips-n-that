@@ -72,7 +72,7 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
                 relative
             "
         >
-            <div className="absolute right-0 bg-indigo-800 z-50 p-2 rounded-full grid place-items-center gap-2">
+            <div className="absolute right-0 bg-indigo-800 z-50 p-2 rounded-full lg:hidden grid place-items-center gap-2 ">
                 <ArrowUp onClick={() => toggleButton("top")} />
                 <Grip onClick={() => toggleButton("mid")} />
                 <ArrowDown onClick={() => toggleButton("bot")} />
