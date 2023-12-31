@@ -41,6 +41,7 @@ model Post {
   author      User             @relation(fields: [authorId], references: [id])
   authorId    String
   tag         PostTag          @relation(fields: [tagId], references: [id])
+  isDraft     Boolean          @default(true)
   tagId       String
   comments    Comment[]
   likes       PostLike[]
