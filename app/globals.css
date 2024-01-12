@@ -95,29 +95,31 @@ ul::first-letter{
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-weight: 600
+  font-weight: 600;
+  width: 100%;
+  @apply border-b-[1px] border-black dark:border-white 
 }
 
 
 
 h1{
-  @apply text-5xl pb-8;
+  @apply text-5xl mb-8;
 
 }
 h2{
-  @apply text-4xl py-8;
+  @apply text-4xl my-8;
 }
 h3{
-  @apply text-3xl py-6;
+  @apply text-3xl my-6;
 }
 h4{
-  @apply text-2xl py-4;
+  @apply text-2xl my-4;
 }
 h5{
-  @apply text-xl py-2;
+  @apply text-xl my-2;
 }
 h6{
-  @apply text-lg py-2;
+  @apply text-lg my-2;
 }
 
 p{
@@ -132,20 +134,20 @@ a:hover{
 }
 
 ol{
-  @apply list-decimal list-inside;
+  @apply list-decimal pl-4;
 }
 ul{
   @apply list-disc list-inside;
 }
 li{
-  @apply text-base pt-6;
+  @apply text-base pt-2 ;
+  text-align: -webkit-match-parent;
 }
-li>ul{
-  @apply pl-6;
+
+ul>li, ol>li{
+  @apply ml-6;
 }
-li>ol{
-  @apply pl-6;
-}
+
 
 blockquote{
   @apply px-4 font-thin relative ;

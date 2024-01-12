@@ -7,7 +7,8 @@ import { NotificationBell } from "./notification-bell";
 import { Lightbulb } from "lucide-react";
 
 export const NavBar = async () => {
-    const loggedIn = !!(await currentProfile());
+    const profile = await currentProfile();
+    const loggedIn = !!profile;
 
     return (
         <nav className="w-full flex backdrop-blur-2xl p-4 z-50 fixed top-0 bg-white dark:bg-white/10 justify-center shadow">
@@ -27,7 +28,7 @@ export const NavBar = async () => {
                 <div className="flex gap-4 items-center">
                     {loggedIn ? (
                         <>
-                            <Link href="/myPosts/create">
+                            <Link href={`/${profile.username}/create`}>
                                 <Button>Create a New Post</Button>
                             </Link>
                             <NotificationBell />

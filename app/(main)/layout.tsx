@@ -1,15 +1,16 @@
+import { NavBar } from "@/components/nav-bar";
+
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
     return (
-        <main className="flex items-center justify-center h-full">
+        <>
+            <NavBar />
             {children}
-        </main>
+        </>
     );
 };
 
 export default Layout;
-
-

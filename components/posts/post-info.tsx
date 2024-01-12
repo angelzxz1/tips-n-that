@@ -36,17 +36,10 @@ const PostInfo = async ({
                     <ButtonInfo
                         userId={thisProfile?.id}
                         postId={post.id}
-                        Like={iLikenIt}
-                    >
-                        <Heart
-                            className={cn(
-                                "cursor-pointer",
-                                !!iLikenIt ? "text-red-500" : ""
-                            )}
-                            strokeWidth={!!iLikenIt ? 3 : 1}
-                        />
-                    </ButtonInfo>
-                    {numberOfLikes}
+                        likeId={iLikenIt?.id}
+                        Icon="Heart"
+                        value={numberOfLikes}
+                    />
                 </div>
                 <div className="flex flex-col items-center justify-center">
                     <MessageCircle className="cursor-pointer" strokeWidth={1} />

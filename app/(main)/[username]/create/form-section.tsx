@@ -14,7 +14,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -24,13 +23,9 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
 import { useState } from "react";
-import { ArrowDown, ArrowUp, Grip, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
 import { ListTags } from "@/components/list-tags";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
-
-// This function will receive 2 arguments, and will toggle the state of the button
-//
 
 const formSchema = z.object({
     post: z.string().min(1),
@@ -39,7 +34,6 @@ const formSchema = z.object({
 
 export default function FormSection({ tags }: { tags: PostTag[] }) {
     const [loading, setLoading] = useState(false);
-    const [toggle, setToggle] = useState<"top" | "mid" | "bot">("mid");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -62,29 +56,8 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
     };
 
     return (
-        <div
-            className="
-                w-full h-full flex justify-center items-center gap-4 px-4 pt-20
-                flex-col lg:flex-row
-                relative
-            "
-        >
-            <div className="absolute right-0 bg-indigo-800 z-50 p-2 rounded-full lg:hidden grid place-items-center gap-2 ">
-                <ArrowUp onClick={() => setToggle("top")} />
-                <Grip onClick={() => setToggle("mid")} />
-                <ArrowDown onClick={() => setToggle("bot")} />
-            </div>
-            <div
-                className={cn(
-                    `
-                    lg:h-3/4 lg:w-2/3
-                    h-full w-full
-                    border shadow-xl rounded-lg dakr:bg-white/5 bg-black/10 flex flex-wrap
-                    transition-all
-                `,
-                    toggle === "bot" || toggle === "mid" ? "h-full" : "h-0"
-                )}
-            >
+        <div className="w-full h-full flex justify-center items-center gap-4 px-4">
+            <div className="h-3/4 w-2/3 border shadow-xl rounded-lg dark:bg-white/5 bg-white flex flex-wrap">
                 <ScrollArea className="w-full h-full">
                     <Markdown
                         className="p-4 w-full h-full"
@@ -94,17 +67,7 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
                     </Markdown>
                 </ScrollArea>
             </div>
-            <div
-                className={cn(
-                    `
-                    lg:h-3/4 lg:w-1/2
-                    h-full w-full
-                    border shadow-xl rounded-lg bg-white/5 flex flex-wrap
-                    transition-all
-                `,
-                    toggle === "top" || toggle === "mid" ? "h-full" : "h-0"
-                )}
-            >
+            <div className="h-3/4 w-1/3 border shadow-xl rounded-lg bg-white/5 flex flex-wrap">
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -119,7 +82,7 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
                                     <FormControl>
                                         <Textarea
                                             placeholder="Type here..."
-                                            className="border border-white/10 rounded-lg p-4 resize-none dark:bg-black/50 bg-indigo-900/50 dark:text-white/90 h-full"
+                                            className="border border-white/10 rounded-lg p-4 resize-none dark:bg-white/5 bg-white dark:text-white/90 h-full"
                                             {...field}
                                         />
                                     </FormControl>

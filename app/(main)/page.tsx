@@ -14,13 +14,17 @@ const SetUpPage = async () => {
             </section>
             <section className="h-full lg:w-3/4 xl:w-2/4 w-full ">
                 {posts.length > 0 ? (
-                    posts.map((post) => (
-                        <PostItem key={post.id} postData={post} />
-                    ))
+                    posts
+                        .reverse()
+                        .map((post) => (
+                            <PostItem key={post.id} postData={post} />
+                        ))
                 ) : (
                     <div className="w-full text-center">
                         No posts yet :c, help us grow this! by{" "}
-                        <Link href="/myPosts/create">creating a new post!</Link>
+                        <Link href={`/${profile.username}/create`}>
+                            creating a new post!
+                        </Link>
                     </div>
                 )}
             </section>

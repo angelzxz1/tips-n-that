@@ -1,6 +1,8 @@
 import Markdown from "react-markdown";
 import { db } from "@/lib/db";
 import { AuthorDetail } from "@/components/posts/author-detail";
+import Comments from "@/components/posts/comments";
+import LoadComments from "@/components/posts/load-comments";
 const PostPage = async ({
     params,
 }: {
@@ -25,13 +27,25 @@ const PostPage = async ({
             authorId: user.id,
         },
     });
+
     if (!postData) {
         return <div>Post not found</div>;
     }
+    const comments = await db.comment.findMany({
+        where: {
+            postId: postData?.id,
+        },
+    });
     return (
-        <div className="pt-[68px] w-full shadow-xl lg:p-4 bg-white dark:bg-zinc-800 rounded-lg relative px-2">
+        <div className="pt-[68px] w-full shadow-xl bg-white dark:bg-zinc-800 rounded-lg relative">
             <AuthorDetail author={user} />
-            <Markdown>{postData.content}</Markdown>
+            <div className="px-2 lg:p-4 w-full">
+                <Markdown>{postData.content}</Markdown>
+            </div>
+            <div className="px-4 border-t dark:border-white/10 mt-8 pt-8 ">
+                <Comments postId={postData.id} userImageUrl={user.imageUrl} />
+                <LoadComments comments={comments} />
+            </div>
         </div>
     );
 };

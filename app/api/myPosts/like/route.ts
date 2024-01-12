@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { PostLike } from "@prisma/client";
 export async function POST(req: Request) {
     try {
         const { postId }: { postId: string } = await req.json();
@@ -19,6 +20,7 @@ export async function POST(req: Request) {
                 postId: post.id,
             },
         });
+
         return NextResponse.json({
             message: "Liked it!",
             likeRes,
