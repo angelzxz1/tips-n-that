@@ -1,17 +1,32 @@
-import { db } from "@/lib/db";
+// "use client"
 import { Comment, User } from "@prisma/client";
 import Image from "next/image";
-
+import axios from "axios";
 import Markdown from "react-markdown";
+import { db } from "@/lib/db";
 const LoadComments = async ({ comments }: { comments: Comment[] }) => {
     return (
-        <div className="w-full flex gap-4 flex-col">
+        <div className="w-full flex gap-4 flex-col mb-4">
             {comments.map(async (comment) => {
                 const creator = (await db.user.findUnique({
                     where: {
                         id: comment.authorId as string,
                     },
                 })) as User;
+                axios
+                    .get(`/api/user`, {
+                        headers: {},
+                    })
+                    .then((res) => {
+                        console.log(res.data);
+                    })
+                    .catch((err) => {
+                        console.clear();
+                        console.log(
+                            "-----------------------------------------------------------"
+                        );
+                        console.log("Hubo un error");
+                    });
                 return (
                     <div
                         className="w-full mt-8 flex gap-4 items-start"
@@ -34,7 +49,9 @@ const LoadComments = async ({ comments }: { comments: Comment[] }) => {
                                     {comment.createdAt.toDateString()}
                                 </span>
                             </div>
-                            <Markdown>{comment.content}</Markdown>
+                            <Markdown className="MD-cont">
+                                {comment.content}
+                            </Markdown>
                         </div>
                     </div>
                 );

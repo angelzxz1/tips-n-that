@@ -40,11 +40,12 @@ const PostPage = async ({
         <div className="pt-[68px] w-full shadow-xl bg-white dark:bg-zinc-800 rounded-lg relative">
             <AuthorDetail author={user} />
             <div className="px-2 lg:p-4 w-full">
-                <Markdown>{postData.content}</Markdown>
+                <Markdown className="MD-cont">{postData.content}</Markdown>
             </div>
-            <div className="px-4 border-t dark:border-white/10 mt-8 pt-8 ">
+            <div className="px-4 border-t dark:border-white/10 mt-8 pt-8 pb-4">
                 <Comments postId={postData.id} userImageUrl={user.imageUrl} />
                 <LoadComments comments={comments} />
+                <div className="testSass"></div>
             </div>
         </div>
     );

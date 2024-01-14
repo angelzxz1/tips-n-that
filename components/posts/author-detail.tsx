@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const AuthorDetail = async ({ author }: { author: User }) => {
     return (
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex justify-end mr-4">
             <Link
                 href={`/${author.username}`}
                 className="flex gap-2 items-center text-black hover:text-black/70 dark:text-white dark:hover:text-white/70"

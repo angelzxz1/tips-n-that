@@ -1,0 +1,102 @@
+@charset "UTF-8";
+.MD-cont h1::first-letter,
+.MD-cont h2::first-letter,
+.MD-cont h3::first-letter,
+.MD-cont h4::first-letter,
+.MD-cont h5::first-letter,
+.MD-cont h6::first-letter,
+.MD-cont p::first-letter,
+.MD-cont ol::first-letter,
+.MD-cont ul::first-letter {
+  @apply capitalize;
+}
+.MD-cont h1,
+.MD-cont h2,
+.MD-cont h3,
+.MD-cont h4,
+.MD-cont h5,
+.MD-cont h6 {
+  font-weight: 600;
+  width: 100%;
+  @apply border-b-[1px] border-black dark:border-white;
+}
+.MD-cont h1 {
+  @apply text-5xl mb-8;
+}
+.MD-cont h2 {
+  @apply text-4xl my-8;
+}
+.MD-cont h3 {
+  @apply text-3xl my-6;
+}
+.MD-cont h4 {
+  @apply text-2xl my-4;
+}
+.MD-cont h5 {
+  @apply text-xl my-2;
+}
+.MD-cont h6 {
+  @apply text-lg my-2;
+}
+.MD-cont p {
+  @apply text-base w-fit;
+}
+.MD-cont a {
+  @apply text-primary relative dark:text-violet-300 text-violet-500 transition-all;
+}
+.MD-cont a:hover {
+  @apply dark:text-violet-500 text-violet-700;
+}
+.MD-cont ol {
+  @apply list-decimal pl-4;
+}
+.MD-cont ol li {
+  @apply ml-6;
+}
+.MD-cont ul {
+  @apply list-disc list-inside;
+}
+.MD-cont ul li {
+  @apply ml-6;
+}
+.MD-cont li {
+  @apply text-base pt-2;
+  text-align: -webkit-match-parent;
+}
+.MD-cont blockquote {
+  @apply px-4 font-thin relative;
+  width: fit-content;
+  font: italic;
+}
+.MD-cont blockquote::before {
+  @apply absolute -top-2;
+  content: "“";
+  display: block;
+  font-size: 30px;
+  left: 0;
+}
+.MD-cont blockquote::after {
+  @apply absolute -top-2;
+  content: "”";
+  display: block;
+  font-size: 30px;
+  left: 100%;
+}
+.MD-cont pre {
+  @apply bg-black rounded-md px-3 py-4 w-full text-white overflow-x-auto;
+}
+.MD-cont table {
+  @apply w-full rounded-xl border border-gray-300;
+}
+.MD-cont table > tr:not(:last-child) {
+  @apply border-b border-gray-300;
+}
+.MD-cont table tr > td,
+.MD-cont table tr > th {
+  @apply pl-2 py-1 border-b border-gray-300;
+}
+.MD-cont table tr > td:not(:first-child) tr > th:not(:first-child) {
+  @apply border-l;
+}
+
+/*# sourceMappingURL=mdstyle.css.map */
