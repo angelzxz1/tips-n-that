@@ -1,23 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-
 interface jsonData {
     userId: string;
 }
 
 export async function GET(req: NextRequest) {
-    console.log("se esta llamando a la ruta GET /api/user");
+    console.log("se esta llamando a la ruta GET /api/posts");
     try {
-        const { userId }: jsonData = await req.json();
-        const user = await db.user.findUnique({
-            where: {
-                id: userId,
-            },
-        });
-        if (!user) return new NextResponse("User not found", { status: 404 });
+        const post = await db.post.findMany()
+        if (!post) return new NextResponse("User not found", { status: 404 });
         return NextResponse.json({
             message: "User found",
-            user,
+            post,
         });
     } catch (error) {
         console.log(error);

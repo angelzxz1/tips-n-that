@@ -13,20 +13,25 @@ const LoadComments = async ({ comments }: { comments: Comment[] }) => {
                         id: comment.authorId as string,
                     },
                 })) as User;
-                axios
-                    .get(`/api/user`, {
-                        headers: {},
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                    })
-                    .catch((err) => {
-                        console.clear();
-                        console.log(
-                            "-----------------------------------------------------------"
-                        );
-                        console.log("Hubo un error");
-                    });
+                try {
+                    const respuesta = axios.get("/api/user")
+                    console.log(respuesta)
+                } catch (error) {
+                    console.clear();
+                    console.log(error)
+                }
+                // axios
+                //     .get("/api/user",{params:{id:"1235"}})
+                //     .then((res) => {
+                //         console.log(res.data);
+                //     })
+                //     .catch((err) => {
+                //         console.clear();
+                //         console.log(
+                //             "-----------------------------------------------------------"
+                //         );
+                //         console.log("Hubo un error");
+                //     });
                 return (
                     <div
                         className="w-full mt-8 flex gap-4 items-start"
