@@ -7,6 +7,7 @@ interface jsonData {
 
 export async function GET(req: NextRequest, res: NextResponse) {
     console.log("se esta llamando a la ruta GET /api/user");
+    return NextResponse.json({message:"This is the response!"})
     // try {
     //     const { userId }: jsonData = await req.json();
     //     const user = await db.user.findUnique({
