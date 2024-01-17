@@ -32,11 +32,9 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-    console.log("DELETE");
     try {
         const { LikeId, postId }: { LikeId: string; postId: string } =
             await req.json();
-        console.log(LikeId, postId);
         const profile = await currentProfile();
         const post = await db.post.findUnique({
             where: {
@@ -50,7 +48,6 @@ export async function DELETE(req: Request) {
                 id: LikeId,
             },
         });
-        console.log(like);
         if (!like) return new NextResponse("Like not found", { status: 404 });
         const likeRes = await db.postLike.delete({
             where: {
