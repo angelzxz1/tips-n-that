@@ -1,10 +1,11 @@
+"use client";
 import { db } from "@/lib/db";
 import { User } from "@prisma/client";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-export const AuthorDetail = async ({ author }: { author: User }) => {
+export const AuthorDetail = ({ author }: { author: User }) => {
     return (
         <div className="flex-1 flex justify-end mr-4">
             <Link

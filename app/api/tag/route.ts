@@ -4,16 +4,16 @@ import { db } from "@/lib/db";
 export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
-        const authorId: string = searchParams.get("authorId") as string;
-        const user = await db.user.findUnique({
+        const tagId: string = searchParams.get("tagId") as string;
+        const tag = await db.postTag.findUnique({
             where: {
-                id: authorId,
+                id: tagId,
             },
         });
-        if (!user) return new NextResponse("User not found", { status: 404 });
+        if (!tag) return new NextResponse("Tag not found", { status: 404 });
         return NextResponse.json({
-            message: "User found",
-            user,
+            message: "Tag found",
+            tag,
         });
     } catch (error) {
         console.log(error);

@@ -1,10 +1,9 @@
 import { NavBar } from "@/components/nav-bar";
-
 interface LayoutProps {
     children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = async ({ children }: LayoutProps) => {
     return (
         <>
             <NavBar />

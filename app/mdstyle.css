@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.MD-cont {
+  @apply w-full;
+}
 .MD-cont h1::first-letter,
 .MD-cont h2::first-letter,
 .MD-cont h3::first-letter,

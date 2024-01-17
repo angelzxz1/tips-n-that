@@ -60,7 +60,7 @@ export default function FormSection({ tags }: { tags: PostTag[] }) {
             <div className="h-3/4 w-2/3 border shadow-xl rounded-lg dark:bg-white/5 bg-white flex flex-wrap">
                 <ScrollArea className="w-full h-full">
                     <Markdown
-                        className="p-4 w-full h-full"
+                        className="p-4 w-full h-full MD-cont"
                         remarkPlugins={[remarkGfm]}
                     >
                         {form.watch("post")}

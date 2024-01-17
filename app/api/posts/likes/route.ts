@@ -4,16 +4,15 @@ import { db } from "@/lib/db";
 export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
-        const authorId: string = searchParams.get("authorId") as string;
-        const user = await db.user.findUnique({
+        const postId: string = searchParams.get("postId") as string;
+        const comments = await db.postLike.findMany({
             where: {
-                id: authorId,
+                postId: postId,
             },
         });
-        if (!user) return new NextResponse("User not found", { status: 404 });
         return NextResponse.json({
-            message: "User found",
-            user,
+            message: "Sent likes",
+            comments,
         });
     } catch (error) {
         console.log(error);

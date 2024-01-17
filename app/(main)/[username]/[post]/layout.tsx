@@ -1,4 +1,5 @@
 import PostInfo from "@/components/posts/post-info";
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 const Layout = async ({
@@ -9,6 +10,7 @@ const Layout = async ({
     params: { username: string; post: string };
 }) => {
     const { username, post } = params;
+    const isLogged = !!(await currentProfile());
     const user = await db.user.findUnique({
         where: {
             username,

@@ -1,45 +1,35 @@
+"use client";
+
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { cn } from "@/lib/utils";
-import { Post } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import { Bookmark, Heart, MessageCircle } from "lucide-react";
 import ButtonInfo from "./button-info";
-
-const PostInfo = async ({
+import { useEffect, useState } from "react";
+import axios from "axios";
+const PostInfo = ({
     post,
     isPostPage,
 }: {
     post: Post;
     isPostPage: boolean;
 }) => {
-    const thisProfile = await currentProfile();
-    const numberOfComments = await db.comment.count({
-        where: {
-            postId: post.id,
-        },
-    });
-    const numberOfLikes = await db.postLike.count({
-        where: {
-            postId: post.id,
-        },
-    });
-    const iLikenIt = await db.postLike.findFirst({
-        where: {
-            postId: post.id,
-            authorId: thisProfile?.id,
-        },
-    });
+    const [numberOfComments, setNumberOfComments] = useState(0);
+    useEffect(() => {
+        axios
+            .get(`/api/posts/comments`, { params: { postId: post.id } })
+            .then((res) => {
+                setNumberOfComments(res.data.numberOfComments);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [post.id]);
     if (isPostPage) {
         return (
             <div className="flex lg:flex-col gap-10  w-full items-center justify-evenly lg:items-end ">
                 <div className="flex flex-col items-center justify-center">
-                    <ButtonInfo
-                        userId={thisProfile?.id}
-                        postId={post.id}
-                        likeId={iLikenIt?.id}
-                        Icon="Heart"
-                        value={numberOfLikes}
-                    />
+                    <ButtonInfo postId={post.id} />
                 </div>
                 <div className="flex flex-col items-center justify-center">
                     <MessageCircle className="cursor-pointer" strokeWidth={1} />

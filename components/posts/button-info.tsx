@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bookmark, Heart, MessageCircle } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -11,94 +11,44 @@ const Icon = ({ Icon }: { Icon: "Heart" | "MessageCircle" | "Bookmark" }) => {
     return <Bookmark strokeWidth={1} />;
 };
 
-const ButtonInfo = ({
-    userId,
-    postId,
-    likeId,
-    Icon,
-    IconClass = "",
-    value,
-}: {
-    userId: string | undefined;
-    postId: string;
-    likeId: string | undefined;
-    Icon: "Heart" | "MessageCircle" | "Bookmark";
-    IconClass?: string;
-    value: number;
-}) => {
-    const [amount, setAmount] = useState<number>(value);
-    const [clicable, setClicable] = useState<boolean>(true);
-    const [iLikedIt, setILikedIt] = useState<boolean>(!!likeId);
-    const [newLikeID, setNewLikeID] = useState<string | undefined>(likeId);
-    if (!userId) {
+const ButtonInfo = ({ postId }: { postId: string }) => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [numberOfLikes, setNumberOfLikes] = useState(0);
+    const [iLikedIt, setILikedIt] = useState(false);
+    const [likeId, setLikeId] = useState<string | undefined>(undefined);
+    const [clicable, setClicable] = useState(true);
+
+    const Icon = "Heart";
+
+    useEffect(() => {
+        axios
+            .get(`/api/posts/info`, { params: { postId } })
+            .then((res) => {
+                setNumberOfLikes(res.data.numberOfLikes);
+                setILikedIt(res.data.iLikenIt);
+                setLikeId(res.data.likeId);
+                setLoggedIn(res.data.loggedIn);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [postId, clicable]);
+    if (!loggedIn) {
         return (
             <>
                 <div>
                     {Icon === "Heart" ? (
-                        <Heart strokeWidth={1} className={cn(IconClass)} />
+                        <Heart strokeWidth={1} />
                     ) : Icon === "MessageCircle" ? (
-                        <MessageCircle
-                            strokeWidth={1}
-                            className={cn(IconClass)}
-                        />
+                        <MessageCircle strokeWidth={1} />
                     ) : (
-                        <Bookmark strokeWidth={1} className={cn(IconClass)} />
+                        <Bookmark strokeWidth={1} />
                     )}
                 </div>
-                {amount}
+                {numberOfLikes}
             </>
         );
     }
-    if (iLikedIt)
-        return (
-            <>
-                <Button
-                    variant={"none"}
-                    size={"none"}
-                    disabled={!clicable}
-                    onClick={async () => {
-                        if (!clicable || !newLikeID) return;
-                        setClicable(false);
-                        try {
-                            setILikedIt(false);
-                            setAmount((amount) => amount - 1);
-                            const res = await axios.delete(
-                                "/api/myPosts/like",
-                                {
-                                    data: {
-                                        LikeId: newLikeID,
-                                        postId,
-                                    },
-                                }
-                            );
-                            setNewLikeID(undefined);
-                            setClicable(!!res);
-                        } catch (error) {
-                            setILikedIt(false);
-                            setClicable(true);
-                        }
-                    }}
-                >
-                    {Icon === "Heart" ? (
-                        <Heart
-                            strokeWidth={1}
-                            className={cn(
-                                IconClass,
-                                "cursor-pointer text-red-500"
-                            )}
-                        />
-                    ) : Icon === "MessageCircle" ? (
-                        <MessageCircle
-                            strokeWidth={1}
-                            className={cn(IconClass)}
-                        />
-                    ) : (
-                        <Bookmark strokeWidth={1} className={cn(IconClass)} />
-                    )}
-                </Button>
-                {amount}
-            </>
-        );
     return (
         <>
             <Button
@@ -106,38 +56,60 @@ const ButtonInfo = ({
                 size={"none"}
                 disabled={!clicable}
                 onClick={async () => {
-                    if (!clicable) return;
-                    setClicable(false);
-                    try {
-                        setILikedIt(true);
-                        setAmount((amount) => amount + 1);
-                        const res = await axios.post("/api/myPosts/like", {
-                            postId,
-                        });
-                        setNewLikeID(res.data.likeRes.id);
-                        setClicable(!!res);
-                    } catch (error) {
-                        setILikedIt(true);
-                        setClicable(true);
+                    if (iLikedIt) {
+                        if (!clicable || !likeId) return;
+                        setClicable(false);
+                        try {
+                            setILikedIt(false);
+                            const res = await axios.delete(
+                                "/api/myPosts/like",
+                                {
+                                    data: {
+                                        LikeId: likeId,
+                                        postId,
+                                    },
+                                }
+                            );
+                            setClicable(!!res);
+                        } catch (error) {
+                            console.log("error");
+                            setILikedIt(false);
+                        } finally {
+                            setClicable(true);
+                        }
+                    } else {
+                        if (!clicable) return;
+                        setClicable(false);
+                        try {
+                            setILikedIt(true);
+                            const res = await axios.post("/api/myPosts/like", {
+                                postId,
+                            });
+                            setLikeId(res.data.likeRes.id);
+                            setClicable(!!res);
+                        } catch (error) {
+                            setILikedIt(true);
+                            setClicable(true);
+                        }
                     }
                 }}
             >
                 {Icon === "Heart" ? (
                     <Heart
                         strokeWidth={1}
-                        className={cn(IconClass, "cursor-pointer")}
+                        className={cn(
+                            "cursor-pointer",
+                            iLikedIt ? " text-red-500" : ""
+                        )}
                     />
                 ) : Icon === "MessageCircle" ? (
-                    <MessageCircle strokeWidth={1} className={cn(IconClass)} />
+                    <MessageCircle strokeWidth={1} />
                 ) : (
-                    <Bookmark strokeWidth={1} className={cn(IconClass)} />
+                    <Bookmark strokeWidth={1} />
                 )}
             </Button>
-            {amount}
+            {numberOfLikes}
         </>
     );
 };
-
 export default ButtonInfo;
-
-const value = !!undefined;

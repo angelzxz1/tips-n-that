@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-interface jsonData {
-    userId: string;
-}
+import { currentProfile } from "@/lib/current-profile";
 
 export async function GET(req: NextRequest) {
     try {
-        const post = await db.post.findMany();
-        if (!post) return new NextResponse("User not found", { status: 404 });
+        const thisProfile = await currentProfile();
+        if (!thisProfile)
+            return NextResponse.json({
+                message: "Not logged in",
+            });
         return NextResponse.json({
-            message: "User found",
-            post,
+            message: "Sent comments",
+            thisProfile,
         });
     } catch (error) {
         console.log(error);
