@@ -8,6 +8,7 @@ import { getFirstHeading, slugify } from "@/lib/utils";
 import PostInfo from "./post-info";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Grainy } from "../filters/grainy";
 
 export const PostItem = ({ postData }: { postData: Post }) => {
     const { tagId, content, authorId, title } = postData;
@@ -59,13 +60,13 @@ export const PostItem = ({ postData }: { postData: Post }) => {
         <Link
             className="p-4 rounded-lg shadow-lg transition-all hover:shadow-black/20 my-8 border border-black/40 flex flex-wrap
             dark:text-white text-black hover:text-black/80 dark:hover:text-white/80
-            bg-white dark:bg-zinc-800
+            bg-white dark:bg-zinc-800 relative
             "
             href={`/${Author.username}/${slug}`}
             target="_blank"
         >
             <AuthorDetail author={Author} />
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex items-center justify-between MD-cont">
                 <h1 className="pb-0">{title}</h1>
                 <ExternalLink className="" />
             </div>

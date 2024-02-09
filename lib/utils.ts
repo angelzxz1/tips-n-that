@@ -22,3 +22,19 @@ export function getFirstHeading(markdown: string): string | null {
         return null;
     }
 }
+
+export function convertirCadena(str: string): string {
+    // Reemplazar guiones con espacios y capitalizar cada palabra
+    const palabras = str
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+    return palabras.join(" ");
+}
+
+export const testArray = () => {
+    const arr = [];
+    for (let i = 0; i < 100; i++) {
+        arr.push({ name: `name ${i}`, item: i });
+    }
+    return arr;
+};

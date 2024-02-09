@@ -28,7 +28,25 @@ model User {
   collections        PostCollection[]
   discussions        Discussion[]
   discussionComments DiscussionComment[]
+  admin              Admin?
   // notifications      Notification[]
+}
+
+enum Role {
+  MASTER
+  ADMIN
+  REVIEWER
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  accUser   User     @relation(fields: [accountID], references: [id])
+  accountID String   @unique
+  username  String   @unique
+  password  String
+  role      Role     @default(REVIEWER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Post {
@@ -53,7 +71,7 @@ model Post {
 
 model PostTag {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   posts     Post[]
