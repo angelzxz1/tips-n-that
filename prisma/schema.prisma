@@ -119,6 +119,11 @@ model PostCollection {
   authorId  String?
 }
 
+enum DiscussionStatus {
+  OPEN
+  CLOSED
+}
+
 model Discussion {
   id        String              @id @default(uuid())
   title     String
@@ -128,6 +133,7 @@ model Discussion {
   author    User?               @relation(fields: [authorId], references: [id])
   authorId  String?
   comments  DiscussionComment[]
+  status    DiscussionStatus    @default(OPEN)
 }
 
 model DiscussionComment {

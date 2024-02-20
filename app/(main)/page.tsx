@@ -4,6 +4,7 @@ import { PostItem } from "@/components/posts/post";
 import Link from "next/link";
 import DisplayPosts from "@/components/main/display-posts";
 import { LeftSideBar } from "@/components/sidebars/left";
+import { RightSideBar } from "@/components/sidebars/right";
 
 const SetUpPage = async () => {
     const profile = await initialProfile();
@@ -16,8 +17,8 @@ const SetUpPage = async () => {
             <section className="h-full lg:w-3/4 xl:w-2/4 w-full ">
                 <DisplayPosts username={profile.username} />
             </section>
-            <section className="min-h-full pt-[68px] top-0 right-0 fixed w-1/4 hidden xl:flex justify-center items-center">
-                this is the right side
+            <section className="h-full pt-[68px] top-0 right-0 fixed w-1/4 hidden xl:flex justify-center items-center">
+                <RightSideBar />
             </section>
         </main>
     );

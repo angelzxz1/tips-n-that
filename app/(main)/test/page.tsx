@@ -1,22 +1,25 @@
 "use client";
 import axios from "axios";
+import { Loader } from "lucide-react";
+import { useState, useEffect } from "react";
+import type { sampleType } from "@/app/api/test/route";
 const TestPage = () => {
-    axios
-        .get("/api/user", { params: { id: "1235" } })
-        .then((res) => {
-            console.log(res.data);
-        })
-        .catch((err) => {
-            console.clear();
-            console.log(
-                "-----------------------------------------------------------"
-            );
-            console.log("Hubo un error");
+    const [Component, setComponent] = useState<JSX.Element>();
+    useEffect(() => {
+        axios.get<sampleType>("/api/test").then((res) => {
+            console.log(typeof (<div>Sample Component</div>));
+            console.log(typeof res.data.component);
+            const component = res.data.component;
+            setComponent(res.data.component as JSX.Element);
         });
+    }, []);
     return (
-        <div className="pt-32">
-            {}
-            <h1>Test</h1>
+        <div className="pt-32 ">
+            {Component ? (
+                (Component as JSX.Element)
+            ) : (
+                <Loader className="animate-spin" />
+            )}
         </div>
     );
 };

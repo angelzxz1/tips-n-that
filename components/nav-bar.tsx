@@ -22,7 +22,6 @@ export const NavBar = async () => {
                         "
                     >
                         <Lightbulb className=" " />
-                        Home
                     </Link>
                 </div>
                 <div className="flex gap-4 items-center">
