@@ -7,9 +7,9 @@ interface jsonData {
 export async function GET(req: NextRequest) {
     try {
         const post = await db.post.findMany();
-        if (!post) return new NextResponse("User not found", { status: 404 });
+        if (!post) return new NextResponse("Posts not found", { status: 404 });
         return NextResponse.json({
-            message: "User found",
+            message: "Posts found",
             post,
         });
     } catch (error) {
