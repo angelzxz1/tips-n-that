@@ -1,5 +1,9 @@
-const UserPage = ({ params }: { params: { username: string } }) => {
-    console.log(params);
+const UserPage = async ({
+    params,
+}: {
+    params: Promise<{ username: string }>;
+}) => {
+    console.log(await params);
     return <div>User Page</div>;
 };
 

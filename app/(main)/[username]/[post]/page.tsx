@@ -2,13 +2,12 @@ import Markdown from "react-markdown";
 import { db } from "@/lib/db";
 import { AuthorDetail } from "@/components/posts/author-detail";
 import Comments from "@/components/posts/comments";
-import LoadComments from "@/components/posts/load-comments";
 const PostPage = async ({
     params,
 }: {
-    params: { username: string; post: string };
+    params: Promise<{ username: string; post: string }>;
 }) => {
-    const { username, post } = params;
+    const { username, post } = await params;
     const user = await db.user.findUnique({
         where: {
             username,
