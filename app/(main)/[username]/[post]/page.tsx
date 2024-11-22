@@ -33,7 +33,7 @@ const PostPage = async ({
     }
     const comments = await db.comment.findMany({
         where: {
-            postId: postData?.id,
+            postId: postData.id,
         },
     });
     return (
@@ -43,9 +43,11 @@ const PostPage = async ({
                 <Markdown className="MD-cont">{postData.content}</Markdown>
             </div>
             <div className="px-4 border-t dark:border-white/10 mt-8 pt-8 pb-4">
-                <Comments postId={postData.id} userImageUrl={user.imageUrl} />
-                <LoadComments comments={comments} />
-                <div className="testSass"></div>
+                <Comments
+                    postId={postData.id}
+                    userImageUrl={user.imageUrl}
+                    comments={comments}
+                />
             </div>
         </div>
     );

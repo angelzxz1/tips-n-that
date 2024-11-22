@@ -16,16 +16,16 @@ export async function GET(req: NextRequest) {
         if (!thisProfile)
             return NextResponse.json({
                 numberOfLikes: likes.length,
-                iLikenIt: false,
+                iLikeIt: false,
                 loggedIn: false,
             });
-        const iLikenIt = likes.find((like) => like.authorId === thisProfile.id);
+        const iLikeIt = likes.find((like) => like.authorId === thisProfile.id);
 
         return NextResponse.json({
             numberOfLikes: likes.length,
-            iLikenIt: !!iLikenIt,
+            iLikeIt: !!iLikeIt,
             loggedIn: true,
-            likeId: iLikenIt ? iLikenIt.id : "",
+            likeId: iLikeIt ? iLikeIt.id : "",
         });
     } catch (error) {
         console.log(error);

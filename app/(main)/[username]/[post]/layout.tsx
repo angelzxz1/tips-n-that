@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer/Footer";
 import PostInfo from "@/components/posts/post-info";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
@@ -34,7 +35,7 @@ const Layout = async ({
     }
 
     return (
-        <div className="w-full relative flex justify-center">
+        <div className="w-full relative flex justify-center flex-wrap">
             <div
                 className="rounded-t-md fixed py-4 flex justify-end z-40 bottom-0 w-full bg-background border-t
                 lg:h-full lg:left-0 lg:w-1/4 lg:bg-transparent lg:justify-center lg:items-center
@@ -43,7 +44,8 @@ const Layout = async ({
             >
                 <PostInfo post={postData} isPostPage={true} />
             </div>
-            <main className="w-full lg:w-1/2">{children}</main>
+            <main className="w-full lg:w-1/2 ">{children}</main>
+            <Footer />
         </div>
     );
 };

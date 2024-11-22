@@ -52,7 +52,9 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
                         {creator.username}
                         {" on: "}
                         <span className="text-xs ">
-                            {comment.createdAt.toDateString()}
+                            {typeof comment.createdAt === "string"
+                                ? new Date(comment.createdAt).toDateString()
+                                : comment.createdAt.toDateString()}
                         </span>
                     </div>
                     <Markdown className="MD-cont">{comment.content}</Markdown>

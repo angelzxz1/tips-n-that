@@ -25,7 +25,7 @@ const ButtonInfo = ({ postId }: { postId: string }) => {
             .get(`/api/posts/info`, { params: { postId } })
             .then((res) => {
                 setNumberOfLikes(res.data.numberOfLikes);
-                setILikedIt(res.data.iLikenIt);
+                setILikedIt(res.data.iLikeIt);
                 setLikeId(res.data.likeId);
                 setLoggedIn(res.data.loggedIn);
             })
