@@ -4,10 +4,12 @@ import { FilterSelection } from "@/components/filter-selection";
 import { Button } from "@/components/ui/button";
 import { testArray } from "@/lib/utils";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import qs from "query-string";
+import React from "react";
 import { useState } from "react";
-const AdminPage = ({ params }: { params: { username: string } }) => {
+const AdminPage = ({ params }: { params: Promise<{ username: string }> }) => {
+    const { username } = React.use(params);
     const [loading, setLoading] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
     const [showTabTags, setShowTabTags] = useState("create");
@@ -16,7 +18,7 @@ const AdminPage = ({ params }: { params: { username: string } }) => {
     const query = qs.stringifyUrl({
         url: "/api/admin",
         query: {
-            username: params.username,
+            username,
         },
     });
     axios

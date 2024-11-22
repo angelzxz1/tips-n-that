@@ -3,13 +3,14 @@
 import { PostItem } from "@/components/posts/post";
 import { Post } from "@prisma/client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
-const TagName = ({ params }: { params: { tagname: string } }) => {
+const TagName = ({ params }: { params: Promise<{ tagname: string }> }) => {
     const [postsTag, setPostsTag] = useState<Post[] | undefined>();
+    const { tagname } = use(params);
     useEffect(() => {
         axios
-            .get("/api/tag/posts", { params: { tagname: params.tagname } })
+            .get("/api/tag/posts", { params: { tagname } })
             .then((res) => {
                 console.log(res.data);
                 setPostsTag(res.data.postsTag);
@@ -17,8 +18,7 @@ const TagName = ({ params }: { params: { tagname: string } }) => {
             .catch((err) => {
                 console.log(err);
             });
-    }, [params.tagname]);
-    const { tagname } = params;
+    }, [tagname]);
     if (!postsTag) return <div>Loading...</div>;
     if (postsTag.length === 0) return <div>No tags found</div>;
     return (
