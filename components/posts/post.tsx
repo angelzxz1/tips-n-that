@@ -11,7 +11,7 @@ import axios from "axios";
 import { Grainy } from "../filters/grainy";
 
 export const PostItem = ({ postData }: { postData: Post }) => {
-    const { tagId, content, authorId, title } = postData;
+    const { tagId, /*content,*/ authorId, title } = postData;
     const [Tag, setTag] = useState<PostTag | null>(null);
     const [Author, setAuthor] = useState<User | null>(null);
     useEffect(() => {
@@ -31,7 +31,7 @@ export const PostItem = ({ postData }: { postData: Post }) => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [authorId, tagId]);
     if (!Tag || !Author) {
         return (
             <div
