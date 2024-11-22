@@ -8,9 +8,9 @@ const Layout = async ({
     params,
 }: {
     children: React.ReactNode;
-    params: { username: string; post: string };
+    params: Promise<{ username: string; post: string }>;
 }) => {
-    const { username, post } = params;
+    const { username, post } = await params;
     const isLogged = !!(await currentProfile());
     const user = await db.user.findUnique({
         where: {
